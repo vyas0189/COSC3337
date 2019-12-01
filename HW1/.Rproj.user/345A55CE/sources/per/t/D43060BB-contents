@@ -1,0 +1,20 @@
+library(MASS)
+
+Harassment1217 <- read.csv(file="Harassment12-17.csv", header=TRUE, sep=",")
+
+k <- with(Harassment1217,MASS:::kde2d(Harassment1217$Longitude,Harassment1217$Latitude))
+filled.contour(k)
+# width.SJ(Harassment1217$Longitude)
+n <- 1000
+library(RColorBrewer)
+k <- 11
+my.cols <- rev(brewer.pal(k, "RdYlBu"))
+z <- kde2d(Harassment1217$Longitude,Harassment1217$Latitude , n=100,h = c(0.01, 0.01))
+
+plot(Harassment1217$Longitude,Harassment1217$Latitude, xlab="X label", ylab="Y label", pch=19, cex=.4)
+contour(z, drawlabels=FALSE, nlevels=k, col=my.cols, add=TRUE)
+smoothScatter(Harassment1217$Longitude,Harassment1217$Latitude, nrpoints=.3*n, colramp=colorRampPalette(my.cols), pch=19, cex=.8)
+
+
+
+

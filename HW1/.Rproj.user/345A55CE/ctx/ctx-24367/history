@@ -1,0 +1,512 @@
+zscore$V1 <- (dataset$V1 - mean(dataset$V1)) / sd(dataset$V1)
+zscore$V2 <- (dataset$V2 - mean(dataset$V2)) / sd(dataset$V2)
+zscore$V3 <- (dataset$V3 - mean(dataset$V3)) / sd(dataset$V3)
+zscore$V4 <- (dataset$V4 - mean(dataset$V4)) / sd(dataset$V4)
+zscore$V5 <- (dataset$V5 - mean(dataset$V5)) / sd(dataset$V5)
+zscore$V6 <- (dataset$V6 - mean(dataset$V6)) / sd(dataset$V6)
+zscore$V7 <- (dataset$V7 - mean(dataset$V7)) / sd(dataset$V7)
+zscore$V8 <- (dataset$V8 - mean(dataset$V8)) / sd(dataset$V8)
+zscore$V9 <- (dataset$V9 - mean(dataset$V9)) / sd(dataset$V9)
+zscore$V10 <- (dataset$V10 - mean(dataset$V10)) / sd(dataset$V10)
+zscore$V11 <- (dataset$V11 - mean(dataset$V11)) / sd(dataset$V11)
+zscore$V12 <- (dataset$V12 - mean(dataset$V12)) / sd(dataset$V12)
+zscore$V13 <- (dataset$V13 - mean(dataset$V13)) / sd(dataset$V13)
+zscore$V14 <- (dataset$V14 - mean(dataset$V14)) / sd(dataset$V14)
+zscore$V15 <- (dataset$V15 - mean(dataset$V15)) / sd(dataset$V15)
+zscore$V16 <- (dataset$V16 - mean(dataset$V16)) / sd(dataset$V16)
+zscore$V17 <- (dataset$V17 - mean(dataset$V17)) / sd(dataset$V17)
+zscore$V18 <- (dataset$V18 - mean(dataset$V18)) / sd(dataset$V18)
+# 6b
+zscore$B[zscore$V19== 'bus'] <- 1
+zscore$B[zscore$V19== 'opel'] <- 0
+zscore$B[zscore$V19== 'saab'] <- 0
+zscore$B[zscore$V19== 'van'] <- 0
+# 6c
+zscore$V[zscore$V19== 'bus'] <- 0
+zscore$V[zscore$V19== 'opel'] <- 0
+zscore$V[zscore$V19== 'saab'] <- 0
+zscore$V[zscore$V19== 'van'] <- 1
+library(rpart)
+library(dplyr)
+library(caTools)
+bus_data <- select(zscore,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18, B)
+set.seed(123)
+sample <- sample.split(bus_data$B, SplitRatio=0.8)
+bus_train = subset(bus_data, sample == TRUE)
+bus_test = subset(bus_data, sample == FALSE)
+fit <-rpart(B~.,
+method="anova", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+summary(fit) # detailed summary of splits
+plot(fit, uniform=true,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=true, all=true, cex=.8)
+plot(fit, uniform=TRUE,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=true, all=true, cex=.8)
+plot(fit, uniform=TRUE,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+#
+fit <-rpart(B~.,
+method="class", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit <-rpart(B~.,
+method="poisson", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+bus_predict <- predict(fit, bus_test, type="anova")
+View(bus_data)
+View(bus_data)
+View(bus_test)
+View(bus_test)
+fit.B.predicted <- predict(fit, bus_test)
+confusionMatrix(fit.B.predicted, bus_test$B)
+library("caret")
+library(caret)
+install.packages("caret")
+library(caret)
+confusionMatrix(fit.B.predicted, bus_test$B)
+rpart.plot(fit, extra= 106)
+library(rpart.plot)
+install.packages("rpart.plot")
+library(rpart.plot)
+rpart.plot(fit, extra= 106)
+rpart.plot(fit, extra=106)
+fit.B.predicted <- predict(fit, bus_test, type = "class")
+fit.B.predicted <- predict(fit, bus_test, type = "anova")
+fit.B.predicted <- predict(fit, bus_test)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="class", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="anova", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit <-rpart(B~.,
+method="class", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test, type="class")
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="poisson", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test, type="class")
+fit.B.predicted <- predict(fit, bus_test, type="poisson")
+fit.B.predicted <- predict(fit, bus_test)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+van_data <- select(zscore,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18, V)
+set.seed(123)
+sample <- sample.split(van_data$V, SplitRatio=0.8)
+van_train = subset(van_data, sample == TRUE)
+van_test = subset(van_data, sample == FALSE)
+View(van_test)
+View(van_test)
+# Importing data
+dataset <- read.table(file = "data.dat", header = FALSE)
+selected_data <- dataset[c(1,2,18)]
+#Calculate covariance matrix
+c <- cov(selected_data)
+correlation <- cor(selected_data)
+# Scatter plot
+plot(dataset$V2,dataset$V18, xlab = "CIRCULARITY", ylab = "HOLLOWS RATIO")
+# Histogram
+hist(dataset$V1, main = "Histogram of COMPACTNESS", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(dataset$V2, main = "Histogram of CIRCULARITY", xlab = "CIRCULARITY", ylab = "Frequency")
+selected_data <- dataset[c(1,2,18,19)]
+opel_hist_data <- selected_data[selected_data$V19 == "opel",]
+hist(opel_hist_data$V1, main = "Histogram of COMPACTNESS of Opel", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(opel_hist_data$V2, main = "Histogram of CIRCULARITY of Opel", xlab = "CIRCULARITY", ylab = "Frequency")
+saab_hist_data <- selected_data[selected_data$V19 == 'saab',]
+hist(saab_hist_data$V1, main = "Histogram of COMPACTNESS of Saab", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(saab_hist_data$V2, , main = "Histogram of CIRCULARITY of Saab", xlab = "CIRCULARITY", ylab = "Frequency")
+bus_hist_data <- selected_data[selected_data$V19 == 'bus',]
+hist(bus_hist_data$V1, main = "Histogram of COMPACTNESS of Bus", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(bus_hist_data$V2, main = "Histogram of CIRCULARITY of Bus", xlab = "CIRCULARITY", ylab = "Frequency")
+van_hist_data <- selected_data[selected_data$V19 == 'van',]
+hist(van_hist_data$V1, main = "Histogram of COMPACTNESS of Van", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(van_hist_data$V2, main = "Histogram of CIRCULARITY of Van", xlab = "CIRCULARITY", ylab = "Frequency")
+#Boxplot
+boxplot(dataset$V1,main="Boxplot of COMPACTNESS", ylab = "COMPACTNESS")
+boxplot(opel_hist_data$V1,main="Boxplot of COMPACTNESS of Opel", ylab = "COMPACTNESS")
+boxplot(saab_hist_data$V1,main="Boxplot of COMPACTNESS of Saab", ylab = "COMPACTNESS")
+boxplot(bus_hist_data$V1,main="Boxplot of COMPACTNESS of Bus", ylab = "COMPACTNESS")
+boxplot(van_hist_data$V1,main="Boxplot of COMPACTNESS of Van", ylab = "COMPACTNESS")
+# Supervised scatter
+plot(selected_data$V1, selected_data$V2, col=c("red","blue")[dataset$V19],pch=19)
+plot(selected_data$V1, selected_data$V18, col=c("red","blue")[dataset$V19],pch=19)
+plot(selected_data$V2, selected_data$V18, col=c("red","blue")[dataset$V19],pch=19)
+# 6a
+# zscore
+zscore <- dataset
+zscore$V1 <- (dataset$V1 - mean(dataset$V1)) / sd(dataset$V1)
+zscore$V2 <- (dataset$V2 - mean(dataset$V2)) / sd(dataset$V2)
+zscore$V3 <- (dataset$V3 - mean(dataset$V3)) / sd(dataset$V3)
+zscore$V4 <- (dataset$V4 - mean(dataset$V4)) / sd(dataset$V4)
+zscore$V5 <- (dataset$V5 - mean(dataset$V5)) / sd(dataset$V5)
+zscore$V6 <- (dataset$V6 - mean(dataset$V6)) / sd(dataset$V6)
+zscore$V7 <- (dataset$V7 - mean(dataset$V7)) / sd(dataset$V7)
+zscore$V8 <- (dataset$V8 - mean(dataset$V8)) / sd(dataset$V8)
+zscore$V9 <- (dataset$V9 - mean(dataset$V9)) / sd(dataset$V9)
+zscore$V10 <- (dataset$V10 - mean(dataset$V10)) / sd(dataset$V10)
+zscore$V11 <- (dataset$V11 - mean(dataset$V11)) / sd(dataset$V11)
+zscore$V12 <- (dataset$V12 - mean(dataset$V12)) / sd(dataset$V12)
+zscore$V13 <- (dataset$V13 - mean(dataset$V13)) / sd(dataset$V13)
+zscore$V14 <- (dataset$V14 - mean(dataset$V14)) / sd(dataset$V14)
+zscore$V15 <- (dataset$V15 - mean(dataset$V15)) / sd(dataset$V15)
+zscore$V16 <- (dataset$V16 - mean(dataset$V16)) / sd(dataset$V16)
+zscore$V17 <- (dataset$V17 - mean(dataset$V17)) / sd(dataset$V17)
+zscore$V18 <- (dataset$V18 - mean(dataset$V18)) / sd(dataset$V18)
+# 6b
+zscore$B[zscore$V19== 'bus'] <- 1
+zscore$B[zscore$V19== 'opel'] <- 0
+zscore$B[zscore$V19== 'saab'] <- 0
+zscore$B[zscore$V19== 'van'] <- 0
+# 6c
+zscore$V[zscore$V19== 'bus'] <- 0
+zscore$V[zscore$V19== 'opel'] <- 0
+zscore$V[zscore$V19== 'saab'] <- 0
+zscore$V[zscore$V19== 'van'] <- 1
+library(rpart)
+library(dplyr)
+library(caTools)
+install.packages("caret")
+library(caret)
+bus_data <- select(zscore,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18, B)
+set.seed(123)
+sample <- sample.split(bus_data$B, SplitRatio=0.8)
+bus_train = subset(bus_data, sample == TRUE)
+bus_test = subset(bus_data, sample == FALSE)
+fit <-rpart(B~.,
+method="anova", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="class", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test, type="class")
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="poisson", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+van_data <- select(zscore,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18, V)
+set.seed(123)
+sample <- sample.split(van_data$V, SplitRatio=0.8)
+van_train = subset(van_data, sample == TRUE)
+van_test = subset(van_data, sample == FALSE)
+fit <-rpart(V~.,
+method="anova", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test)
+table_mat <- table(van_test$V, van_predict)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+fit <-rpart(V~.,
+method="class", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test, type = "class")
+table_mat <- table(van_test$V, van_predict)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+fit <-rpart(V~.,
+method="poisson", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test)
+table_mat <- table(van_test$V, van_predict)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+install.packages("caret")
+# Importing data
+dataset <- read.table(file = "data.dat", header = FALSE)
+selected_data <- dataset[c(1,2,18)]
+#Calculate covariance matrix
+c <- cov(selected_data)
+correlation <- cor(selected_data)
+# Scatter plot
+plot(dataset$V2,dataset$V18, xlab = "CIRCULARITY", ylab = "HOLLOWS RATIO")
+# Histogram
+hist(dataset$V1, main = "Histogram of COMPACTNESS", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(dataset$V2, main = "Histogram of CIRCULARITY", xlab = "CIRCULARITY", ylab = "Frequency")
+selected_data <- dataset[c(1,2,18,19)]
+opel_hist_data <- selected_data[selected_data$V19 == "opel",]
+hist(opel_hist_data$V1, main = "Histogram of COMPACTNESS of Opel", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(opel_hist_data$V2, main = "Histogram of CIRCULARITY of Opel", xlab = "CIRCULARITY", ylab = "Frequency")
+saab_hist_data <- selected_data[selected_data$V19 == 'saab',]
+hist(saab_hist_data$V1, main = "Histogram of COMPACTNESS of Saab", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(saab_hist_data$V2, , main = "Histogram of CIRCULARITY of Saab", xlab = "CIRCULARITY", ylab = "Frequency")
+bus_hist_data <- selected_data[selected_data$V19 == 'bus',]
+hist(bus_hist_data$V1, main = "Histogram of COMPACTNESS of Bus", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(bus_hist_data$V2, main = "Histogram of CIRCULARITY of Bus", xlab = "CIRCULARITY", ylab = "Frequency")
+van_hist_data <- selected_data[selected_data$V19 == 'van',]
+hist(van_hist_data$V1, main = "Histogram of COMPACTNESS of Van", xlab = "COMPACTNESS", ylab = "Frequency")
+hist(van_hist_data$V2, main = "Histogram of CIRCULARITY of Van", xlab = "CIRCULARITY", ylab = "Frequency")
+#Boxplot
+boxplot(dataset$V1,main="Boxplot of COMPACTNESS", ylab = "COMPACTNESS")
+boxplot(opel_hist_data$V1,main="Boxplot of COMPACTNESS of Opel", ylab = "COMPACTNESS")
+boxplot(saab_hist_data$V1,main="Boxplot of COMPACTNESS of Saab", ylab = "COMPACTNESS")
+boxplot(bus_hist_data$V1,main="Boxplot of COMPACTNESS of Bus", ylab = "COMPACTNESS")
+boxplot(van_hist_data$V1,main="Boxplot of COMPACTNESS of Van", ylab = "COMPACTNESS")
+# Supervised scatter
+plot(selected_data$V1, selected_data$V2, col=c("red","blue")[dataset$V19],pch=19)
+plot(selected_data$V1, selected_data$V18, col=c("red","blue")[dataset$V19],pch=19)
+plot(selected_data$V2, selected_data$V18, col=c("red","blue")[dataset$V19],pch=19)
+# 6a
+# zscore
+zscore <- dataset
+zscore$V1 <- (dataset$V1 - mean(dataset$V1)) / sd(dataset$V1)
+zscore$V2 <- (dataset$V2 - mean(dataset$V2)) / sd(dataset$V2)
+zscore$V3 <- (dataset$V3 - mean(dataset$V3)) / sd(dataset$V3)
+zscore$V4 <- (dataset$V4 - mean(dataset$V4)) / sd(dataset$V4)
+zscore$V5 <- (dataset$V5 - mean(dataset$V5)) / sd(dataset$V5)
+zscore$V6 <- (dataset$V6 - mean(dataset$V6)) / sd(dataset$V6)
+zscore$V7 <- (dataset$V7 - mean(dataset$V7)) / sd(dataset$V7)
+zscore$V8 <- (dataset$V8 - mean(dataset$V8)) / sd(dataset$V8)
+zscore$V9 <- (dataset$V9 - mean(dataset$V9)) / sd(dataset$V9)
+zscore$V10 <- (dataset$V10 - mean(dataset$V10)) / sd(dataset$V10)
+zscore$V11 <- (dataset$V11 - mean(dataset$V11)) / sd(dataset$V11)
+zscore$V12 <- (dataset$V12 - mean(dataset$V12)) / sd(dataset$V12)
+zscore$V13 <- (dataset$V13 - mean(dataset$V13)) / sd(dataset$V13)
+zscore$V14 <- (dataset$V14 - mean(dataset$V14)) / sd(dataset$V14)
+zscore$V15 <- (dataset$V15 - mean(dataset$V15)) / sd(dataset$V15)
+zscore$V16 <- (dataset$V16 - mean(dataset$V16)) / sd(dataset$V16)
+zscore$V17 <- (dataset$V17 - mean(dataset$V17)) / sd(dataset$V17)
+zscore$V18 <- (dataset$V18 - mean(dataset$V18)) / sd(dataset$V18)
+# 6b
+zscore$B[zscore$V19== 'bus'] <- 1
+zscore$B[zscore$V19== 'opel'] <- 0
+zscore$B[zscore$V19== 'saab'] <- 0
+zscore$B[zscore$V19== 'van'] <- 0
+# 6c
+zscore$V[zscore$V19== 'bus'] <- 0
+zscore$V[zscore$V19== 'opel'] <- 0
+zscore$V[zscore$V19== 'saab'] <- 0
+zscore$V[zscore$V19== 'van'] <- 1
+library(rpart)
+library(dplyr)
+library(caTools)
+install.packages("caret")
+library(caret)
+bus_data <- select(zscore,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18, B)
+set.seed(123)
+sample <- sample.split(bus_data$B, SplitRatio=0.8)
+bus_train = subset(bus_data, sample == TRUE)
+bus_test = subset(bus_data, sample == FALSE)
+fit <-rpart(B~.,
+method="anova", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="class", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test, type="class")
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+fit <-rpart(B~.,
+method="poisson", data=bus_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification Tree for B",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+fit.B.predicted <- predict(fit, bus_test)
+table_mat <- table(bus_test$B, fit.B.predicted)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+van_data <- select(zscore,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18, V)
+set.seed(123)
+sample <- sample.split(van_data$V, SplitRatio=0.8)
+van_train = subset(van_data, sample == TRUE)
+van_test = subset(van_data, sample == FALSE)
+fit <-rpart(V~.,
+method="anova", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test)
+table_mat <- table(van_test$V, van_predict)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+fit <-rpart(V~.,
+method="class", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test, type = "class")
+table_mat <- table(van_test$V, van_predict)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+fit <-rpart(V~.,
+method="poisson", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test)
+table_mat <- table(van_test$V, van_predict)
+table_mat
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+fit <-rpart(V~.,
+method="class", data=van_test)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="Classification tree for Van",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+van_predict <- predict(fit, van_test, type = "class")
+evaluation(fit, van_predict, "response")
+library(evaluate)
+Harassment05 <- read.csv(file="Harassment0-5.csv", header=TRUE, sep=",")
+k <- with(Harassment05,MASS:::kde2d(Harassment05$Longitude,Harassment05$Latitude))
+filled.contour(k)
+# width.SJ(Harassment1217$Longitude)
+n <- 1000
+k <- 11
+my.cols <- rev(brewer.pal(k, "RdYlBu"))
+z <- kde2d(Harassment05$Longitude,Harassment05$Latitude , n=100,h = c(0.01, 0.01))
+plot(Harassment05$Longitude,Harassment05$Latitude, xlab="X label", ylab="Y label", pch=19, cex=.4)
+contour(z, drawlabels=FALSE, nlevels=k, col=my.cols, add=TRUE)
+smoothScatter(Harassment05$Longitude,Harassment05$Latitude, nrpoints=.3*n, colramp=colorRampPalette(my.cols), pch=19, cex=.8)
+library(MASS)
+library(RColorBrewer)
+Harassment05 <- read.csv(file="Harassment0-5.csv", header=TRUE, sep=",")
+k <- with(Harassment05,MASS:::kde2d(Harassment05$Longitude,Harassment05$Latitude))
+filled.contour(k)
+# width.SJ(Harassment1217$Longitude)
+n <- 1000
+k <- 11
+my.cols <- rev(brewer.pal(k, "RdYlBu"))
+z <- kde2d(Harassment05$Longitude,Harassment05$Latitude , n=100,h = c(0.01, 0.01))
+plot(Harassment05$Longitude,Harassment05$Latitude, xlab="X label", ylab="Y label", pch=19, cex=.4)
+contour(z, drawlabels=FALSE, nlevels=k, col=my.cols, add=TRUE)
+smoothScatter(Harassment05$Longitude,Harassment05$Latitude, nrpoints=.3*n, colramp=colorRampPalette(my.cols), pch=19, cex=.8)
+printcp(fit) # display the results
+plotcp(fit) # visualize cross-validation results
+summary(fit) # detailed summary of splits
+plot(fit, uniform=TRUE,
+main="classification tree for Bus",margin=0.05)
+text(fit, use.n=TRUE, all=TRUE, cex=.8)
+Harassment05 <- read.csv(file="Harassment0-5.csv", header=TRUE, sep=",")
+k <- with(Harassment05,MASS:::kde2d(Harassment05$Longitude,Harassment05$Latitude))
+filled.contour(k)
+install.packages("MASS")
+library(MASS)
+install.packages("RColorBrewer")
+library(RColorBrewer)
+install.packages("KernSmooth")
+library(KernSmooth)
+install.packages("caTools")
+library(caTools)
+install.packages("dplyr")
+library(dplyr)
+install.packages("rpart")
+library(rpart)
