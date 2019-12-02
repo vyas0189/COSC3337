@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574299282022.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E180A431",
+    "lastKnownWriteTime" : 1574299951,
+    "last_content_update" : 1575077752102,
+    "path" : "C:/Users/vyas0/Desktop/UH_CS/COSC3337/HW3/HW3.R",
+    "project_path" : "HW3.R",
+    "properties" : {
+        "cursorPosition" : "98,0",
+        "scrollLine" : "85",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
